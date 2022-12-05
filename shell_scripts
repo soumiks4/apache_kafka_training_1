@@ -1,0 +1,38 @@
+#download kafka
+wget https://archive.apache.org/dist/kafka/2.8.0/kafka_2.12-2.8.0.tgz
+
+#extract kafka
+tar -xzf kafka_2.12-2.8.0.tgz
+
+#creates a new directory 'kafka_2.12-2.8.0' in the current directory
+
+cd kafka_2.12-2.8.0
+#move to kafka dir and start **zookeeper server**
+bin/zookeeper-server-start.sh config/zookeeper.properties
+
+#in a new terminal:
+cd kafka_2.12-2.8.0
+#start the **Kafka message broker** service
+bin/kafka-server-start.sh config/server.properties
+
+#create a topic
+cd kafka_2.12-2.8.0
+bin/kafka-topics.sh --create --topic news --bootstrap-server localhost:9092
+#done when 'Created topic news'
+
+#to start a producer
+bin/kafka-console-producer.sh --topic news --bootstrap-server localhost:9092
+#producer starts and we get '>' prompt, sending three messages:
+Good morning
+Good day
+Enjoy the Kafka lab
+
+#new term, start consumer
+cd kafka_2.12-2.8.0
+#to listen to the messages in the topic news
+bin/kafka-console-consumer.sh --topic news --from-beginning --bootstrap-server localhost:9092
+
+#any line typed in producer terminal appears in consumer terminal
+
+#cleanup: delete kafka installation file
+rm kafka_2.12-2.8.0.tgz
