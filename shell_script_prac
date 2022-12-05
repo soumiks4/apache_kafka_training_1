@@ -1,0 +1,15 @@
+#new topic weather
+cd kafka_2.12-2.8.0
+bin/kafka-topics.sh --create --topic weather --bootstrap-server localhost:9092
+Created topic weather
+
+#post messages to topic weather (producer terminal)
+bin/kafka-console-producer.sh --topic weather --bootstrap-server localhost:9092
+>
+>
+
+#read messages from topic weather (consumer console)
+cd kafka_2.12-2.8.0
+bin/kafka-console-consumer.sh --topic weather --from-beginning --bootstrap-server localhost:9092
+>
+>
